@@ -1,0 +1,80 @@
+/*
+ * packages/config/tailwind-tokens.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ * LocalMart shared design tokens — Tailwind v4 @theme format
+ *
+ * This is the SINGLE SOURCE OF TRUTH for all design tokens.
+ * Both admin-web and store-web consume this file by adding:
+ *   @import "../../packages/config/tailwind-tokens.css";
+ * inside their globals.css (after `@import "tailwindcss"`).
+ *
+ * Theme: Light green and white
+ *   primary:  #16a34a (green-600) family
+ *   surface:  white / green-tinted off-whites
+ *   Light-only mode (no dark: variants this sprint)
+ *
+ * ⚠️  Do NOT manually duplicate these tokens in any app's globals.css.
+ *     Edit here and both apps pick up the change automatically.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+@theme inline {
+  /* ── Primary ──────────────────────────────────────────────────────────── */
+  --color-primary:             #16a34a; /* green-600 */
+  --color-primary-light:       #22c55e; /* green-500 */
+  --color-primary-subtle:      #dcfce7; /* green-100 */
+  --color-primary-muted:       #bbf7d0; /* green-200 */
+  --color-primary-dark:        #15803d; /* green-700 */
+  --color-primary-foreground:  #ffffff;
+
+  /* ── Surface ──────────────────────────────────────────────────────────── */
+  --color-surface:             #ffffff;
+  --color-surface-muted:       #f0fdf4; /* green-50  */
+  --color-surface-card:        #ffffff;
+  --color-surface-border:      #d1fae5; /* green-100 border */
+  --color-surface-input:       #f9fafb;
+
+  /* ── Neutral ──────────────────────────────────────────────────────────── */
+  --color-neutral-50:          #f9fafb;
+  --color-neutral-100:         #f3f4f6;
+  --color-neutral-200:         #e5e7eb;
+  --color-neutral-300:         #d1d5db;
+  --color-neutral-400:         #9ca3af;
+  --color-neutral-500:         #6b7280;
+  --color-neutral-600:         #4b5563;
+  --color-neutral-700:         #374151;
+  --color-neutral-800:         #1f2937;
+  --color-neutral-900:         #111827;
+
+  /* ── Semantic ─────────────────────────────────────────────────────────── */
+  --color-danger:              #dc2626; /* red-600   */
+  --color-danger-light:        #fca5a5; /* red-300   */
+  --color-danger-subtle:       #fef2f2; /* red-50    */
+  --color-danger-dark:         #b91c1c; /* red-700   */
+
+  --color-warning:             #d97706; /* amber-600 */
+  --color-warning-light:       #fcd34d; /* amber-300 */
+  --color-warning-subtle:      #fffbeb; /* amber-50  */
+  --color-warning-dark:        #b45309; /* amber-700 */
+
+  --color-success:             #16a34a;
+  --color-success-subtle:      #f0fdf4;
+
+  /* ── Sidebar ──────────────────────────────────────────────────────────── */
+  --color-sidebar-bg:          #f0fdf4; /* green-50  */
+  --color-sidebar-border:      #bbf7d0; /* green-200 */
+  --color-sidebar-active:      #16a34a;
+  --color-sidebar-hover:       #dcfce7;
+  --color-sidebar-text:        #374151; /* neutral-700 */
+  --color-sidebar-muted:       #6b7280; /* neutral-500 */
+
+  /* ── Typography ───────────────────────────────────────────────────────── */
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* ── Border radius ────────────────────────────────────────────────────── */
+  --radius:    0.5rem;   /*  8px */
+  --radius-sm: 0.375rem; /*  6px */
+  --radius-md: 0.5rem;   /*  8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+}
