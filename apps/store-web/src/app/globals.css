@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import "../../../../packages/config/tailwind-tokens.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--color-surface);
+  --color-foreground: var(--color-neutral-900);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar for carousels but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
+/* Animations for Cart Toast */
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes progress-shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.animate-toast-enter {
+  animation: slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-progress {
+  animation: progress-shrink 3s linear forwards;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@localmart/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./tailwind-preset.js",
+  "description": "Shared Tailwind CSS preset for all LocalMart apps"
+}

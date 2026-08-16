@@ -1,0 +1,82 @@
+# docker-compose.yml
+# ──────────────────────────────────────────────────────────────────────────────
+# NOT used in local dev (we use Neon cloud DB + Upstash Redis).
+# Committed so the team can spin up a fully local stack in future with:
+#   docker compose up -d
+# All service names / ports / env vars intentionally match .env.example so
+# switching from cloud to local is a one-line .env change.
+# ──────────────────────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: localmart-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: localmart
+      POSTGRES_USER: localmart
+      POSTGRES_PASSWORD: localmart_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U localmart -d localmart"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: localmart-redis
+    restart: unless-stopped
+    command: redis-server --requirepass localmart_redis_password
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "localmart_redis_password", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.9
+    container_name: localmart-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: masterKey
+      MEILI_ENV: development
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Uncomment to run the API in Docker (useful for team / CI)
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/api/Dockerfile
+  #   container_name: localmart-api
+  #   restart: unless-stopped
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   env_file: .env
+  #   ports:
+  #     - "3000:3000"
+
+volumes:
+  postgres_data:
+  redis_data:
+  meilisearch_data:

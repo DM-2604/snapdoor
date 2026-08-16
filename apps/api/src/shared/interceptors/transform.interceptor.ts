@@ -1,0 +1,34 @@
+// Implements v3 §0.2 — Response transform interceptor
+// Wraps every successful response in { data, meta } envelope.
+
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable, map } from 'rxjs';
+
+export interface ApiResponse<T> {
+  data: T;
+  meta: {
+    timestamp: string;
+    path: string;
+  };
+}
+
+@Injectable()
+export class TransformInterceptor<T> implements NestInterceptor<T, ApiResponse<T>> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<ApiResponse<T>> {
+    const request = context.switchToHttp().getRequest();
+    return next.handle().pipe(
+      map((data) => ({
+        data,
+        meta: {
+          timestamp: new Date().toISOString(),
+          path: request.url as string,
+        },
+      })),
+    );
+  }
+}

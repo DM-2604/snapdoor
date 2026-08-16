@@ -1,0 +1,39 @@
+{
+  "name": "localmart-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=apps/api",
+    "build:api": "npm run build --workspace=apps/api",
+    "dev:admin": "npm run dev --workspace=apps/admin-web",
+    "build:admin": "npm run build --workspace=apps/admin-web",
+    "dev:store": "npm run dev --workspace=apps/store-web",
+    "build:store": "npm run build --workspace=apps/store-web",
+    "dev:store-admin": "npm run dev --workspace=apps/store-admin-web",
+    "build:store-admin": "npm run build --workspace=apps/store-admin-web",
+    "db:generate": "npm run db:generate --workspace=apps/api",
+    "db:migrate": "npm run db:migrate --workspace=apps/api",
+    "db:push": "npm run db:push --workspace=apps/api",
+    "db:seed": "npm run db:seed --workspace=apps/api",
+    "db:studio": "npm run db:studio --workspace=apps/api",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{ts,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-tooltip": "^1.2.16",
+    "react-icons": "^5.7.0"
+  }
+}
